@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
+
+const allPosts = await getCollection('blog')
+const posts = allPosts
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+---
+
+<BaseLayout title="博客">
+  <section class="container mx-auto px-4">
+    <header class="page-header">
+      <h1>博客文章</h1>
+      <p class="subtitle">分享技术心得和生活感悟</p>
+    </header>
+
+    <div class="posts-list">
+      {
+        posts.map((post) => (
+          <article class="post-card">
+            <div class="post-content">
+              <a href={`/blog/${post.slug}`} class="post-link">
+                <h2 class="post-title">{post.data.title}</h2>
+                <p class="post-description">{post.data.description}</p>
+                <div class="post-meta">
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString('zh-CN', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </time>
+                  <span class="category">{post.data.category}</span>
+                  <span class="tags">
+                    {post.data.tags.map((tag) => (
+                      <span class="tag">#{tag}</span>
+                    ))}
+                  </span>
+                </div>
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <style>
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem 0;
+    }
+
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin: 0 0 1rem 0;
+      color: #1f2937;
+    }
+
+    .subtitle {
+      font-size: 1.125rem;
+      color: #6b7280;
+      margin: 0;
+    }
+
+    .posts-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .post-card {
+      background: white;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+    }
+
+    .post-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-content {
+      padding: 1.5rem;
+    }
+
+    .post-link {
+      display: block;
+      text-decoration: none !important;
+    }
+
+    .post-title {
+      font-size: 1.5rem;
+      margin: 0 0 0.75rem 0;
+      color: #1f2937;
+    }
+
+    .post-description {
+      color: #6b7280;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.875rem;
+      color: #9ca3af;
+      flex-wrap: wrap;
+    }
+
+    .category {
+      background: #e0f2fe;
+      color: #0284c7;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-weight: 500;
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      color: #6b7280;
+    }
+
+    @media (max-width: 768px) {
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .post-title {
+        font-size: 1.25rem;
+      }
+
+      .post-meta {
+        font-size: 0.8125rem;
+      }
+    }
+  </style>
+</BaseLayout>

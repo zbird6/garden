@@ -1,0 +1,128 @@
+---
+interface Props {
+  title: string
+  description?: string
+}
+
+const { title, description = '个人静态网站 - 博客、图片展示与小游戏' } = Astro.props
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
+    <title>{title} - GardenX</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="container mx-auto px-4">
+          <a href="/" class="logo">GardenX</a>
+          <ul class="nav-links">
+            <li>
+              <a href="/">首页</a>
+            </li>
+            <li>
+              <a href="/blog">博客</a>
+            </li>
+            <li>
+              <a href="/gallery">图片展示</a>
+            </li>
+            <li>
+              <a href="/games">小游戏</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="container mx-auto px-4">
+        <p>&copy; {new Date().getFullYear()} GardenX. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <style is:global>
+      .navbar {
+        background: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .navbar .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 0;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #0ea5e9;
+        text-decoration: none !important;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav-links a {
+        color: #6b7280;
+        font-weight: 500;
+        text-decoration: none !important;
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover {
+        color: #0ea5e9;
+      }
+
+      .main-content {
+        min-height: calc(100vh - 140px);
+        padding: 2rem 0;
+      }
+
+      .footer {
+        background: #1f2937;
+        color: white;
+        padding: 2rem 0;
+        margin-top: 4rem;
+      }
+
+      .footer p {
+        text-align: center;
+        margin: 0;
+      }
+
+      @media (max-width: 768px) {
+        .navbar .container {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .nav-links {
+          gap: 1rem;
+          font-size: 0.875rem;
+        }
+      }
+    </style>
+  </body>
+</html>
