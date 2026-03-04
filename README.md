@@ -1,4 +1,4 @@
-# GardenX
+# ZGarden
 
 基于 Astro + Vue 3 构建的个人静态网站，集成博客、图片展示和原生小游戏功能。
 
@@ -92,7 +92,7 @@ Netlify 会自动识别此配置，无需额外设置。
 ## 项目结构
 
 ```
-gardenx/
+zgarden/
 ├── public/                 # 静态资源
 │   └── favicon.svg        # 网站图标
 ├── src/

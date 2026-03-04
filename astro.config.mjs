@@ -9,7 +9,7 @@ export default defineConfig({
     }),
     tailwind()
   ],
-  site: 'https://garden.netlify.app',
+  site: 'https://zgarden.netlify.app',
   base: '/',
   build: {
     format: 'directory'

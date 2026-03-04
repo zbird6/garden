@@ -1,5 +1,5 @@
 ---
-title: '欢迎使用 GardenX'
+title: '欢迎使用 ZGarden'
 description: '这是一个基于 Astro + Vue 3 构建的个人静态网站 Demo'
 pubDate: 2026-03-03
 tags: ['Astro', 'Vue', 'Netlify']
@@ -7,7 +7,7 @@ category: '技术'
 image: '/images/blog-first.jpg'
 ---
 
-## 欢迎来到 GardenX
+## 欢迎来到 ZGarden
 
 这是一个基于 Astro 和 Vue 3 构建的个人静态网站 Demo，集成了博客、图片展示和原生小游戏功能。
 
