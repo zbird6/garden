@@ -54,14 +54,6 @@ npm run dev
 npm run build
 ```
 
-### 构建静态版本（支持直接文件访问）
-
-```bash
-npm run build:static
-```
-
-构建后可直接访问 `dist/index.html`，无需启动服务器。
-
 ### 预览生产版本
 
 ```bash
@@ -101,8 +93,7 @@ gardenx/
 │   └── favicon.svg        # 网站图标
 ├── src/
 │   ├── assets/            # 可打包资源
-│   │   ├── less/         # Less 样式文件
-│   │   └── images/       # 本地图片
+│   │   └── css/          # CSS 样式文件
 │   ├── components/       # Vue 组件
 │   │   └── Gallery.vue   # 图片展示组件
 │   ├── layouts/         # Astro 页面布局
@@ -155,7 +146,7 @@ category: '分类'
 
 - Tailwind CSS: 直接使用 utility classes
 - 组件样式: 组件文件内的 `<style>` 标签
-- Less 支持: 组件中可使用 `<style lang="less">`
+- 全局样式: `src/assets/css/global.css`
 
 ## 代码规范
 

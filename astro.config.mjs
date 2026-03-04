@@ -1,17 +1,15 @@
 import { defineConfig } from 'astro/config';
 import vue from '@astrojs/vue';
 import tailwind from '@astrojs/tailwind';
-import mdx from '@astrojs/mdx';
 
 export default defineConfig({
   integrations: [
     vue({
       propsDestructure: false
     }),
-    tailwind(),
-    mdx()
+    tailwind()
   ],
-  site: 'https://your-site.netlify.app',
+  site: 'https://garden.netlify.app',
   base: '/',
   build: {
     format: 'directory'
@@ -21,9 +19,6 @@ export default defineConfig({
   vite: {
     build: {
       assetsInlineLimit: 4096
-    },
-    define: {
-      __APP_VERSION__: JSON.stringify('1.0.0')
     }
   }
 });
