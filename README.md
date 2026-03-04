@@ -5,11 +5,10 @@
 ## 技术栈
 
 - **Astro** - 核心框架，静态渲染
-- **Vue 3** - 轻交互组件
-- **Pinia** - 状态管理
+- **Vue 3** - 轻交互组件（Composition API）
 - **Tailwind CSS** - 样式框架
 - **Vite** - 构建工具
-- **Less** - CSS 预处理器
+- **TypeScript** - 类型支持
 
 ## 功能特性
 
@@ -30,6 +29,7 @@
 - 贪吃蛇游戏
 - 乒乓球游戏
 - HTML5 Canvas + 原生 JavaScript
+- Vue 3 响应式状态管理
 - 本地存储保存最高分
 
 ## 快速开始
@@ -53,6 +53,14 @@ npm run dev
 ```bash
 npm run build
 ```
+
+### 构建静态版本（支持直接文件访问）
+
+```bash
+npm run build:static
+```
+
+构建后可直接访问 `dist/index.html`，无需启动服务器。
 
 ### 预览生产版本
 
@@ -94,10 +102,11 @@ gardenx/
 ├── src/
 │   ├── assets/            # 可打包资源
 │   │   ├── less/         # Less 样式文件
-│   │   ├── images/       # 本地图片
-│   │   └── audio/        # 小游戏音效
+│   │   └── images/       # 本地图片
 │   ├── components/       # Vue 组件
 │   │   └── Gallery.vue   # 图片展示组件
+│   ├── layouts/         # Astro 页面布局
+│   │   └── BaseLayout.astro
 │   ├── content/          # 博客内容 (Markdown)
 │   │   ├── config.ts    # 内容配置
 │   │   └── blog/        # 博客文章
@@ -105,15 +114,12 @@ gardenx/
 │   │   ├── snake/       # 贪吃蛇游戏
 │   │   ├── pong/        # 乒乓球游戏
 │   │   └── common/      # 公共工具
-│   ├── layouts/         # Astro 页面布局
-│   │   └── BaseLayout.astro
 │   ├── pages/           # 页面路由
 │   │   ├── index.astro      # 首页
 │   │   ├── blog/           # 博客页面
 │   │   ├── gallery.astro   # 图片展示
 │   │   └── games/          # 小游戏
-│   ├── store/           # Pinia 状态管理
-│   │   └── gameStore.js
+
 │   └── utils/           # 工具函数
 │       └── storage.js
 ├── astro.config.mjs     # Astro 配置
@@ -147,9 +153,9 @@ category: '分类'
 
 ### 修改样式
 
-- 全局样式: `src/assets/less/global.less`
-- 小游戏样式: `src/assets/less/games.less`
+- Tailwind CSS: 直接使用 utility classes
 - 组件样式: 组件文件内的 `<style>` 标签
+- Less 支持: 组件中可使用 `<style lang="less">`
 
 ## 代码规范
 

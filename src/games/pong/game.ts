@@ -1,10 +1,51 @@
 /**
  * 乒乓球游戏逻辑
  */
+
+interface Ball {
+  x: number
+  y: number
+  vx: number
+  vy: number
+}
+
+interface Score {
+  player: number
+  ai: number
+}
+
+interface GameConfig {
+  onScoreUpdate?: (score: Score) => void
+  onGameOver?: () => void
+}
+
 export class PongGame {
-  constructor(canvas, config = {}) {
+  private canvas: HTMLCanvasElement
+  private ctx: CanvasRenderingContext2D
+
+  // 游戏配置
+  private paddleHeight: number
+  private paddleWidth: number
+  private ballSize: number
+
+  // 游戏状态
+  private playerY: number
+  private aiY: number
+  private ball: Ball
+  private playerScore: number
+  private aiScore: number
+  private isPlaying: boolean
+  private isGameOver: boolean
+  private gameLoop: number | null
+  private aiSpeed: number
+
+  // 回调函数
+  private onScoreUpdate: (score: Score) => void
+  private onGameOver: () => void
+
+  constructor(canvas: HTMLCanvasElement, config: GameConfig = {}) {
     this.canvas = canvas
-    this.ctx = canvas.getContext('2d')
+    this.ctx = canvas.getContext('2d')!
 
     // 游戏配置
     this.paddleHeight = 80
@@ -29,7 +70,7 @@ export class PongGame {
     this.init()
   }
 
-  init() {
+  private init(): void {
     // 初始化画布大小
     this.canvas.width = 600
     this.canvas.height = 400
@@ -43,19 +84,21 @@ export class PongGame {
     this.draw()
   }
 
-  start() {
+  start(): void {
     if (this.isPlaying) return
     this.isPlaying = true
-    this.gameLoop = setInterval(() => this.update(), 16)
+    this.gameLoop = window.setInterval(() => this.update(), 16)
   }
 
-  pause() {
+  pause(): void {
     if (!this.isPlaying) return
     this.isPlaying = false
-    clearInterval(this.gameLoop)
+    if (this.gameLoop) {
+      clearInterval(this.gameLoop)
+    }
   }
 
-  reset() {
+  reset(): void {
     this.pause()
     this.playerScore = 0
     this.aiScore = 0
@@ -67,14 +110,14 @@ export class PongGame {
     this.draw()
   }
 
-  resetBall() {
+  private resetBall(): void {
     this.ball.x = this.canvas.width / 2
     this.ball.y = this.canvas.height / 2
     this.ball.vx = Math.random() > 0.5 ? 5 : -5
     this.ball.vy = Math.random() * 4 - 2
   }
 
-  update() {
+  private update(): void {
     if (this.isGameOver) {
       this.pause()
       return
@@ -135,7 +178,7 @@ export class PongGame {
     this.draw()
   }
 
-  updateAI() {
+  private updateAI(): void {
     const paddleCenter = this.aiY + this.paddleHeight / 2
     const targetY = this.ball.y - this.paddleHeight / 2
 
@@ -149,12 +192,12 @@ export class PongGame {
     this.aiY = Math.max(0, Math.min(this.canvas.height - this.paddleHeight, this.aiY))
   }
 
-  movePlayer(deltaY) {
+  movePlayer(deltaY: number): void {
     this.playerY += deltaY
     this.playerY = Math.max(0, Math.min(this.canvas.height - this.paddleHeight, this.playerY))
   }
 
-  draw() {
+  private draw(): void {
     // 清空画布
     this.ctx.fillStyle = '#f9fafb'
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
@@ -196,8 +239,8 @@ export class PongGame {
     // 绘制分数
     this.ctx.font = '48px Arial'
     this.ctx.fillStyle = '#0ea5e9'
-    this.ctx.fillText(this.playerScore, 100, 60)
+    this.ctx.fillText(this.playerScore.toString(), 100, 60)
     this.ctx.fillStyle = '#ef4444'
-    this.ctx.fillText(this.aiScore, this.canvas.width - 100, 60)
+    this.ctx.fillText(this.aiScore.toString(), this.canvas.width - 100, 60)
   }
 }

@@ -1,14 +1,15 @@
 /**
  * 本地存储工具
  */
+
 export const Storage = {
   /**
    * 获取存储的值
    */
-  get(key, defaultValue = null) {
+  get<T = any>(key: string, defaultValue: T | null = null): T | null {
     try {
       const value = localStorage.getItem(key)
-      return value ? JSON.parse(value) : defaultValue
+      return value ? (JSON.parse(value) as T) : defaultValue
     } catch (error) {
       console.error(`获取存储数据失败: ${key}`, error)
       return defaultValue
@@ -18,7 +19,7 @@ export const Storage = {
   /**
    * 设置存储的值
    */
-  set(key, value) {
+  set<T = any>(key: string, value: T): boolean {
     try {
       localStorage.setItem(key, JSON.stringify(value))
       return true
@@ -31,7 +32,7 @@ export const Storage = {
   /**
    * 删除存储的值
    */
-  remove(key) {
+  remove(key: string): boolean {
     try {
       localStorage.removeItem(key)
       return true
@@ -44,7 +45,7 @@ export const Storage = {
   /**
    * 清空所有存储
    */
-  clear() {
+  clear(): boolean {
     try {
       localStorage.clear()
       return true

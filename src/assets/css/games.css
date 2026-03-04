@@ -1,0 +1,86 @@
+/* 小游戏通用样式 - 使用 Tailwind */
+
+/* 游戏容器 */
+.game-container {
+  @apply w-full max-w-2xl mx-auto p-4;
+}
+
+/* 游戏头部 */
+.game-header {
+  @apply flex items-center justify-between mb-4 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200;
+}
+
+.score-display {
+  @apply text-xl font-semibold;
+
+  .label {
+    @apply text-gray-500 font-normal;
+  }
+
+  .value {
+    @apply text-sky-500;
+  }
+}
+
+.game-controls {
+  @apply flex gap-2;
+}
+
+.game-controls button {
+  @apply px-4 py-2 border-none rounded-md cursor-pointer font-medium transition-colors duration-200;
+}
+
+.game-controls button.btn-primary {
+  @apply bg-sky-500 text-white hover:bg-sky-600;
+}
+
+.game-controls button.btn-secondary {
+  @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+}
+
+/* 游戏画布区域 */
+.game-canvas {
+  @apply bg-white rounded-lg shadow-md overflow-hidden;
+}
+
+.game-canvas canvas {
+  @apply block mx-auto;
+}
+
+/* 游戏说明 */
+.game-info {
+  @apply mt-4 p-4 bg-white rounded-lg shadow-md;
+}
+
+.game-info h3 {
+  @apply mt-0 mb-2 text-lg;
+}
+
+.game-info ul {
+  @apply m-0 pl-6;
+}
+
+.game-info li {
+  @apply mb-1;
+}
+
+/* 游戏结束遮罩 */
+.game-over-overlay {
+  @apply absolute inset-0 bg-black/70 flex items-center justify-center flex-col rounded-lg;
+}
+
+.game-over-content {
+  @apply text-center text-white;
+}
+
+.game-over-content h2 {
+  @apply text-4xl mb-4;
+}
+
+.game-over-content p {
+  @apply text-xl mb-6;
+}
+
+.game-over-content button {
+  @apply px-8 py-3 text-lg border-none rounded-lg bg-sky-500 text-white cursor-pointer transition-colors duration-200 hover:bg-sky-600;
+}

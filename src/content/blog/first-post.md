@@ -22,9 +22,9 @@ image: '/images/blog-first.jpg'
 
 - **Astro** - 核心框架，静态渲染
 - **Vue 3** - 轻交互组件
-- **Pinia** - 状态管理
 - **Tailwind CSS** - 样式框架
 - **Vite** - 构建工具
+- **TypeScript** - 类型支持
 
 ---
 

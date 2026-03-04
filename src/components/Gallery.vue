@@ -151,16 +151,13 @@ onUnmounted(() => {
 
 <style scoped>
 .gallery-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem;
-}
-
-.grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
 .gallery-item {
@@ -176,10 +173,8 @@ onUnmounted(() => {
 }
 
 .gallery-item:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-0.25rem);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 .gallery-item img {
@@ -227,10 +222,7 @@ onUnmounted(() => {
 /* 灯箱样式 */
 .lightbox {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: rgba(0, 0, 0, 0.95);
   display: flex;
   align-items: center;
@@ -243,7 +235,7 @@ onUnmounted(() => {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: none;
+  background: transparent;
   border: none;
   color: white;
   font-size: 2.5rem;
@@ -284,7 +276,7 @@ onUnmounted(() => {
 }
 
 .lightbox-content {
-  max-width: 900px;
+  max-width: 48rem;
   width: 100%;
 }
 
@@ -334,7 +326,7 @@ onUnmounted(() => {
 }
 
 @media (max-width: 768px) {
-  .grid {
+  .gallery-container {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1rem;
   }

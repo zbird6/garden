@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { SnakeGame } from './game.js'
+import { SnakeGame } from './game'
 
 const canvasRef = ref(null)
 let game = null

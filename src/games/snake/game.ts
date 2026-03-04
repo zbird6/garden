@@ -1,16 +1,50 @@
 /**
  * 贪吃蛇游戏逻辑
  */
+
+interface Point {
+  x: number
+  y: number
+}
+
+type Direction = 'up' | 'down' | 'left' | 'right'
+
+interface GameConfig {
+  gridSize?: number
+  gameSpeed?: number
+  onScoreUpdate?: (score: number) => void
+  onGameOver?: () => void
+}
+
 export class SnakeGame {
-  constructor(canvas, config = {}) {
+  private canvas: HTMLCanvasElement
+  private ctx: CanvasRenderingContext2D
+  private gridSize: number
+  private gameSpeed: number
+
+  // 游戏状态
+  private snake: Point[]
+  private food: Point
+  private direction: Direction
+  private nextDirection: Direction
+  private score: number
+  private isPlaying: boolean
+  private isGameOver: boolean
+  private gameLoop: number | null
+
+  // 回调函数
+  private onScoreUpdate: (score: number) => void
+  private onGameOver: () => void
+
+  constructor(canvas: HTMLCanvasElement, config: GameConfig = {}) {
     this.canvas = canvas
-    this.ctx = canvas.getContext('2d')
+    this.ctx = canvas.getContext('2d')!
     this.gridSize = config.gridSize || 20
     this.gameSpeed = config.gameSpeed || 150
 
     // 游戏状态
     this.snake = []
-    this.food = {}
+    this.food = { x: 0, y: 0 }
     this.direction = 'right'
     this.nextDirection = 'right'
     this.score = 0
@@ -25,7 +59,7 @@ export class SnakeGame {
     this.init()
   }
 
-  init() {
+  private init(): void {
     // 初始化画布大小
     this.canvas.width = 400
     this.canvas.height = 400
@@ -46,20 +80,22 @@ export class SnakeGame {
     this.draw()
   }
 
-  start() {
+  start(): void {
     if (this.isPlaying) return
     this.isPlaying = true
     this.isGameOver = false
-    this.gameLoop = setInterval(() => this.update(), this.gameSpeed)
+    this.gameLoop = window.setInterval(() => this.update(), this.gameSpeed)
   }
 
-  pause() {
+  pause(): void {
     if (!this.isPlaying) return
     this.isPlaying = false
-    clearInterval(this.gameLoop)
+    if (this.gameLoop) {
+      clearInterval(this.gameLoop)
+    }
   }
 
-  reset() {
+  reset(): void {
     this.pause()
     this.score = 0
     this.direction = 'right'
@@ -69,7 +105,7 @@ export class SnakeGame {
     this.onScoreUpdate(0)
   }
 
-  update() {
+  private update(): void {
     if (this.isGameOver) {
       this.pause()
       return
@@ -117,7 +153,7 @@ export class SnakeGame {
     this.draw()
   }
 
-  checkCollision(head) {
+  private checkCollision(head: Point): boolean {
     // 检查墙壁碰撞
     if (
       head.x < 0 ||
@@ -132,7 +168,7 @@ export class SnakeGame {
     return this.snake.some((segment) => segment.x === head.x && segment.y === head.y)
   }
 
-  generateFood() {
+  private generateFood(): void {
     const maxX = Math.floor(this.canvas.width / this.gridSize)
     const maxY = Math.floor(this.canvas.height / this.gridSize)
 
@@ -144,7 +180,7 @@ export class SnakeGame {
     } while (this.snake.some((segment) => segment.x === this.food.x && segment.y === this.food.y))
   }
 
-  draw() {
+  private draw(): void {
     // 清空画布
     this.ctx.fillStyle = '#f9fafb'
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
@@ -159,7 +195,7 @@ export class SnakeGame {
     this.drawSnake()
   }
 
-  drawGrid() {
+  private drawGrid(): void {
     this.ctx.strokeStyle = '#e5e7eb'
     this.ctx.lineWidth = 0.5
 
@@ -178,7 +214,7 @@ export class SnakeGame {
     }
   }
 
-  drawSnake() {
+  private drawSnake(): void {
     this.snake.forEach((segment, index) => {
       this.ctx.fillStyle = index === 0 ? '#0ea5e9' : '#38bdf8'
       this.ctx.fillRect(
@@ -251,7 +287,7 @@ export class SnakeGame {
     })
   }
 
-  drawFood() {
+  private drawFood(): void {
     this.ctx.fillStyle = '#ef4444'
     this.ctx.beginPath()
     this.ctx.arc(
@@ -276,13 +312,13 @@ export class SnakeGame {
     this.ctx.fill()
   }
 
-  gameOver() {
+  private gameOver(): void {
     this.isGameOver = true
     this.onGameOver()
   }
 
-  changeDirection(newDirection) {
-    const opposites = {
+  changeDirection(newDirection: Direction): void {
+    const opposites: Record<Direction, Direction> = {
       up: 'down',
       down: 'up',
       left: 'right',

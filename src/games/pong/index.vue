@@ -1,6 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { PongGame } from './game.js'
+import { PongGame } from './game'
 
 const canvasRef = ref(null)
 const scores = ref({ player: 0, ai: 0 })
