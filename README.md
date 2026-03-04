@@ -78,12 +78,15 @@ npm run preview
 
 ### Netlify 配置
 
-Netlify 会自动识别以下配置：
+项目包含 `netlify.toml` 配置文件，明确指定了以下设置：
 
 - **构建命令**: `npm run build`
 - **发布目录**: `dist`
+- **Node 版本**: 18
 - **自动 HTTPS**: 开启
 - **CDN 加速**: 开启
+
+Netlify 会自动识别此配置，无需额外设置。
 
 ## 项目结构
 
