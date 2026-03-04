@@ -83,6 +83,7 @@ npm run preview
 - **构建命令**: `npm run build`
 - **发布目录**: `dist`
 - **Node 版本**: 18
+- **重定向规则**: 配置了 `/* → /index.html`
 - **自动 HTTPS**: 开启
 - **CDN 加速**: 开启
 
