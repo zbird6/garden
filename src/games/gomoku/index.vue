@@ -44,7 +44,9 @@ const handleGameOver = (winnerValue) => {
 
 const resetGame = () => {
   game.value.reset()
-  board.value = Array(15).fill(0).map(() => Array(15).fill(0))
+  board.value = Array(15)
+    .fill(0)
+    .map(() => Array(15).fill(0))
   currentPlayer.value = 1
   gameOver.value = false
   winner.value = null
@@ -52,7 +54,9 @@ const resetGame = () => {
 }
 
 onMounted(() => {
-  board.value = Array(15).fill(0).map(() => Array(15).fill(0))
+  board.value = Array(15)
+    .fill(0)
+    .map(() => Array(15).fill(0))
   game.value = new GomokuGame(15, handleMove, handleGameOver)
 })
 </script>
@@ -74,18 +78,14 @@ onMounted(() => {
 
     <div class="game-canvas">
       <div class="board-grid">
-        <div 
-          v-for="(row, rowIndex) in board" 
-          :key="rowIndex" 
-          class="board-row"
-        >
-          <div 
-            v-for="(cell, colIndex) in row" 
-            :key="colIndex" 
+        <div v-for="(row, rowIndex) in board" :key="rowIndex" class="board-row">
+          <div
+            v-for="(cell, colIndex) in row"
+            :key="colIndex"
             class="board-cell"
             :class="{
-              'black': cell === 1,
-              'white': cell === 2
+              black: cell === 1,
+              white: cell === 2,
             }"
             @click="handleCellClick(rowIndex, colIndex)"
           ></div>
@@ -335,16 +335,16 @@ onMounted(() => {
     align-items: flex-start;
     gap: 1rem;
   }
-  
+
   .game-controls {
     align-self: flex-end;
   }
-  
+
   .board-cell {
     width: 24px;
     height: 24px;
   }
-  
+
   .board-cell.black::after,
   .board-cell.white::after {
     width: 18px;

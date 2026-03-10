@@ -4,10 +4,7 @@ import SnakeGame from '../../games/snake/index.vue'
 import GomokuGame from '../../games/gomoku/index.vue'
 
 export function getStaticPaths() {
-  return [
-    { params: { game: 'snake' } },
-    { params: { game: 'gomoku' } }
-  ]
+  return [{ params: { game: 'snake' } }, { params: { game: 'gomoku' } }]
 }
 
 const { game } = Astro.params
