@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import SnakeGame from '../../games/snake/index.vue'
-import PongGame from '../../games/pong/index.vue'
 ---
 
 <BaseLayout title="小游戏">
@@ -15,11 +14,6 @@ import PongGame from '../../games/pong/index.vue'
       <div class="game-wrapper">
         <h2>贪吃蛇</h2>
         <SnakeGame client:load />
-      </div>
-
-      <div class="game-wrapper">
-        <h2>乒乓球</h2>
-        <PongGame client:load />
       </div>
     </div>
   </section>

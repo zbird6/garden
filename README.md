@@ -27,7 +27,6 @@
 ### 3. 原生小游戏
 
 - 贪吃蛇游戏
-- 乒乓球游戏
 - HTML5 Canvas + 原生 JavaScript
 - Vue 3 响应式状态管理
 - 本地存储保存最高分
@@ -107,7 +106,6 @@ zgarden/
 │   │   └── blog/        # 博客文章
 │   ├── games/           # 小游戏模块
 │   │   ├── snake/       # 贪吃蛇游戏
-│   │   ├── pong/        # 乒乓球游戏
 │   │   └── common/      # 公共工具
 │   ├── pages/           # 页面路由
 │   │   ├── index.astro      # 首页
