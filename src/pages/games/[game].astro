@@ -1,10 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import SnakeGame from '../../games/snake/index.vue'
+import GomokuGame from '../../games/gomoku/index.vue'
 
 export function getStaticPaths() {
   return [
-    { params: { game: 'snake' } }
+    { params: { game: 'snake' } },
+    { params: { game: 'gomoku' } }
   ]
 }
 
@@ -14,6 +16,8 @@ let gameTitle = ''
 
 if (game === 'snake') {
   gameTitle = '贪吃蛇'
+} else if (game === 'gomoku') {
+  gameTitle = '五子棋'
 }
 
 if (!gameTitle) {
@@ -26,6 +30,10 @@ if (!gameTitle) {
     <div class="game-detail">
       <div class="game-content">
         {game === 'snake' && <SnakeGame client:load />}
+        {game === 'gomoku' && <GomokuGame client:load />}
+      </div>
+      <div class="game-footer">
+        <a href="/games" class="back-link">← 返回游戏列表</a>
       </div>
     </div>
   </section>
@@ -41,6 +49,28 @@ if (!gameTitle) {
       border: 1px solid #e5e7eb;
       border-radius: 8px;
       padding: 2rem;
+    }
+
+    .game-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 2px solid #e5e7eb;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: #0ea5e9;
+      text-decoration: none !important;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border: 2px solid #0ea5e9;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .back-link:hover {
+      background: #0ea5e9;
+      color: white;
     }
   </style>
 </BaseLayout>
