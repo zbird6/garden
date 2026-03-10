@@ -1,6 +1,6 @@
 # ZGarden
 
-基于 Astro + Vue 3 构建的个人静态网站，集成博客、图片展示和原生小游戏功能。
+基于 Astro + Vue 3 构建的个人静态网站，集成博客和原生小游戏功能。
 
 ## 技术栈
 
@@ -18,13 +18,7 @@
 - 支持标签、分类、日期等元数据
 - 自动生成文章路由
 
-### 2. 图片展示
-
-- Vue 3 组件实现图片轮播和原文跳转
-- 响应式网格布局
-- 灯箱效果查看大图
-
-### 3. 原生小游戏
+### 2. 原生小游戏
 
 - 贪吃蛇游戏
 - HTML5 Canvas + 原生 JavaScript
@@ -97,8 +91,7 @@ zgarden/
 ├── src/
 │   ├── assets/            # 可打包资源
 │   │   └── css/          # CSS 样式文件
-│   ├── components/       # Vue 组件
-│   │   └── Gallery.vue   # 图片展示组件
+│   ├── components/       # Vue 组件（暂空）
 │   ├── layouts/         # Astro 页面布局
 │   │   └── BaseLayout.astro
 │   ├── content/          # 博客内容 (Markdown)
@@ -110,7 +103,6 @@ zgarden/
 │   ├── pages/           # 页面路由
 │   │   ├── index.astro      # 首页
 │   │   ├── blog/           # 博客页面
-│   │   ├── gallery.astro   # 图片展示
 │   │   └── games/          # 小游戏
 
 │   └── utils/           # 工具函数
