@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import SnakeGame from '../../games/snake/index.vue'
+
+export function getStaticPaths() {
+  return [
+    { params: { game: 'snake' } }
+  ]
+}
+
+const { game } = Astro.params
+
+let gameTitle = ''
+
+if (game === 'snake') {
+  gameTitle = '贪吃蛇'
+}
+
+if (!gameTitle) {
+  return Astro.redirect('/games')
+}
+---
+
+<BaseLayout title={gameTitle}>
+  <section class="container mx-auto px-4">
+    <div class="game-detail">
+      <div class="game-content">
+        {game === 'snake' && <SnakeGame client:load />}
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .game-detail {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .game-content {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 2rem;
+    }
+  </style>
+</BaseLayout>

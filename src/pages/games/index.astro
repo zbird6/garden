@@ -1,39 +1,75 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import SnakeGame from '../../games/snake/index.vue'
 ---
 
 <BaseLayout title="游戏">
   <section class="container mx-auto px-4">
-    <div class="games-section">
-      <div class="game-wrapper">
-        <h2>贪吃蛇</h2>
-        <SnakeGame client:load />
-      </div>
+    <h1 class="text-3xl font-bold mb-8 text-center">游戏列表</h1>
+    <div class="games-grid">
+      <a href="/games/snake" class="game-card">
+        <div class="game-card-content">
+          <h2 class="text-xl font-semibold mb-2">贪吃蛇</h2>
+          <p class="text-gray-600 mb-4">经典的贪吃蛇游戏，控制蛇头吃食物，越长越好！</p>
+          <div class="play-button">开始游戏</div>
+        </div>
+      </a>
     </div>
   </section>
 
   <style>
-    .games-section {
-      max-width: 800px;
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
-    .game-wrapper {
-      margin-bottom: 4rem;
+    .game-card {
+      display: block;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
     }
 
-    .game-wrapper h2 {
-      text-align: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
+    .game-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      border-color: #d1d5db;
+    }
+
+    .game-card-content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .game-card h2 {
       color: #1f2937;
+      margin-bottom: 0.5rem;
     }
 
-    @media (max-width: 768px) {
-      .game-wrapper h2 {
-        font-size: 1.25rem;
-      }
+    .game-card p {
+      flex-grow: 1;
+      margin-bottom: 1rem;
+    }
+
+    .play-button {
+      background: #3b82f6;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: 500;
+      transition: background-color 0.2s ease;
+    }
+
+    .play-button:hover {
+      background: #2563eb;
     }
   </style>
 </BaseLayout>
