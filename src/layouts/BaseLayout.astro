@@ -4,7 +4,7 @@ interface Props {
   description?: string
 }
 
-const { title, description = '个人静态网站 - 博客、图片展示与小游戏' } = Astro.props
+const { title, description = '个人静态网站 - 博客、图片展示与游戏' } = Astro.props
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 ---
@@ -18,14 +18,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalURL} />
-    <title>{title} - ZGarden</title>
+    <title>{title} - 花园</title>
   </head>
   <body class="bg-gray-50 text-gray-800">
     <body>
       <header>
         <nav class="navbar">
           <div class="container mx-auto px-4">
-            <a href="/" class="logo">ZGarden</a>
+            <a href="/" class="logo">花园</a>
             <ul class="nav-links">
               <li>
                 <a href="/">首页</a>
@@ -34,7 +34,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
                 <a href="/blog">博客</a>
               </li>
               <li>
-                <a href="/games">小游戏</a>
+                <a href="/games">游戏</a>
               </li>
             </ul>
           </div>
@@ -47,7 +47,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
       <footer class="footer">
         <div class="container mx-auto px-4">
-          <p>&copy; {new Date().getFullYear()} ZGarden. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} 花园. All rights reserved.</p>
         </div>
       </footer>
 
